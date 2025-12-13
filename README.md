@@ -1,16 +1,78 @@
-# React + Vite
+# 🌐 Personal Portfolio Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains the source code for my personal portfolio website.  
+It showcases my skills, projects, and experience in **Software Development** and **Cybersecurity**, along with ways to connect with me.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
+🔗 **Portfolio:** https://portfolio-website-seven-plum-26.vercel.app/
+🔗 **GitHub:** https://github.com/yash-076  
+🔗 **LinkedIn:** https://www.linkedin.com/in/yashrastogi11  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 About the Website
 
-## React Compiler
+This portfolio is designed to present:
+- My technical skills and interests
+- Selected projects with practical, real-world use cases
+- My learning journey in software development and cybersecurity
+- Easy ways to get in touch with me
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The site focuses on being **clean, responsive, and performance-oriented**.
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+
+**Frontend**
+- HTML5
+- CSS3
+- JavaScript
+- React.js
+- Tailwind CSS
+- Three.js
+
+**Backend & Tools**
+- FastAPI
+- WebSockets
+- MongoDB
+- Git & GitHub
+- Linux
+- VS Code
+
+## 📂 Sections Included
+
+- **Home** – Introduction and role overview  
+- **About** – Background and areas of interest  
+- **Work / Projects** – Real-world development projects  
+- **Skills** – Technical skills and tools  
+- **Contact** – Social links and email  
+
+## 🚧 Projects
+
+### 🛡️ SecuWatch
+A real-time cybersecurity monitoring and alert visualization platform.
+
+**Key Features**
+- Real-time alert ingestion and streaming using WebSockets
+- Interactive dashboard for alert triage and filtering
+- Analytics including alert timelines, severity breakdown, and top indicators
+- Backend built with **FastAPI**
+- Frontend built using **React & Tailwind CSS**
+
+**Focus Areas**
+- SOC-style monitoring
+- Threat detection & response workflows
+- Scalable real-time systems
+
+
+### 💬 Pulse ChatApp
+A real-time chat application focused on speed, simplicity, and clean UI.
+
+**Key Features**
+- Real-time messaging
+- Responsive and modern user interface
+- Clean component-based frontend architecture
+- Scalable backend design for future enhancements
+
+**Tech Used**
+- React.js
+- JavaScript
+- Backend APIs & real-time communication concepts
