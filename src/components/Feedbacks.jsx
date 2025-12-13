@@ -1,8 +1,8 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { styles } from '../styles'
+import { styles } from '../styles.js'
 import SectionWrapper from '../hoc/SectionWrapper.jsx'
-import { fadeIn, textVariant } from '../utils/motion'
+import { fadeIn, textVariant } from '../utils/motion.js'
 import { testimonials } from '../constants'
 
 const FeedbackCard = ({ index, testimonial, name, designation, company, image }) => (

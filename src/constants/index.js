@@ -1,28 +1,26 @@
 import {
-  mobile,
-  backend,
-  creator,
+  cybersecurity,
+  fullstack,
+  Soc,
   web,
-  javascript,
-  typescript,
+
   html,
+  javascript,
   css,
   reactjs,
-  redux,
   tailwind,
+  threejs,
   nodejs,
+  python,
   mongodb,
   git,
-  figma,
-  docker,
-  meta,
-  starbucks,
-  tesla,
-  shopify,
-  carrent,
-  jobit,
-  tripguide,
-  threejs,
+
+  soc,
+  threatsage,
+  
+  secuwatch,
+  pulse,
+  portfolio,
 } from "../assets";
 
 export const navLinks = [
@@ -46,20 +44,21 @@ const services = [
     icon: web,
   },
   {
-    title: "React Native Developer",
-    icon: mobile,
+    title: "Full-Stack Developer",
+    icon: fullstack,
   },
   {
-    title: "Backend Developer",
-    icon: backend,
+    title: "Cybersecurity Learner",
+    icon: cybersecurity,
   },
   {
-    title: "Content Creator",
-    icon: creator,
+    title: "SOC & Threat Detection Enthusiast",
+    icon: Soc,
   },
 ];
 
 const technologies = [
+  // Frontend
   {
     name: "HTML 5",
     icon: html,
@@ -73,101 +72,70 @@ const technologies = [
     icon: javascript,
   },
   {
-    name: "TypeScript",
-    icon: typescript,
-  },
-  {
     name: "React JS",
     icon: reactjs,
-  },
-  {
-    name: "Redux Toolkit",
-    icon: redux,
   },
   {
     name: "Tailwind CSS",
     icon: tailwind,
   },
+  { 
+    name: "Three JS", 
+    icon: threejs, 
+  },
+  // Backend
   {
     name: "Node JS",
     icon: nodejs,
   },
   {
+    name: "Python",
+    icon: python,
+  },
+
+  // Database
+  {
     name: "MongoDB",
     icon: mongodb,
   },
+
+  // Version Control
   {
-    name: "Three JS",
-    icon: threejs,
-  },
-  {
-    name: "git",
+    name: "Git",
     icon: git,
-  },
-  {
-    name: "figma",
-    icon: figma,
-  },
-  {
-    name: "docker",
-    icon: docker,
   },
 ];
 
+
 const experiences = [
   {
-    title: "React.js Developer",
-    company_name: "Starbucks",
-    icon: starbucks,
+    title: "Founder / Developer",
+    company_name: "ThreatSage (Personal Project)",
+    icon: threatsage,
     iconBg: "#383E56",
-    date: "March 2020 - April 2021",
+    date: "Jun 2025 - Present",
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "Created SecuWatch — a real-time cybersecurity dashboard that ingests alerts, streams them over WebSockets, and visualizes threat analytics.",
+      "Built backend alert ingestion and broadcasting components (Python + FastAPI) and the React + Tailwind frontend for alert triage and filtering.",
+      "Designed analytics pages (timeline, severity breakdown, top IPs/URLs/hashes) and implemented alert status flows (New → In Progress → Resolved).",
+      "Worked on integrating file-based alert producers with the dashboard and planned migration to MongoDB for persistent storage.",
     ],
   },
+
   {
-    title: "React Native Developer",
-    company_name: "Tesla",
-    icon: tesla,
-    iconBg: "#E6DEDD",
-    date: "Jan 2021 - Feb 2022",
-    points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
-    ],
-  },
-  {
-    title: "Web Developer",
-    company_name: "Shopify",
-    icon: shopify,
+    title: "SOC Learner",
+    company_name: "Self-driven Labs & Courses",
+    icon: soc, 
     iconBg: "#383E56",
-    date: "Jan 2022 - Jan 2023",
+    date: "2024 - Present",
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
-    ],
-  },
-  {
-    title: "Full stack Developer",
-    company_name: "Meta",
-    icon: meta,
-    iconBg: "#E6DEDD",
-    date: "Jan 2023 - Present",
-    points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "Completed Practical Ethical Hacking (TCM), Linux Fundamentals (TCM), Ethical Hacking (Cisco), and Introduction to Cybersecurity (Cisco).",
+      "Built hands-on tools: Real-Time Log Analyzer, Domain Recon Automation, Port Scanner, and Network Sniffer for learning and SOC practice.",
+      "Performed log analysis with Splunk, developed detection rules, and practiced blue-team workflows and incident triage.",
     ],
   },
 ];
+
 
 const testimonials = [
   {
@@ -198,68 +166,47 @@ const testimonials = [
 
 const projects = [
   {
-    name: "Car Rent",
+    name: "SecuWatch v1.1",
     description:
-      "Web-based platform that allows users to search, book, and manage car rentals from various providers, providing a convenient and efficient solution for transportation needs.",
+      "A real-time cybersecurity monitoring dashboard that visualizes alerts, supports WebSocket live updates, alert acknowledgment, export features, and threat analytics. Built under the ThreatSage ecosystem.",
     tags: [
-      {
-        name: "react",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "mongodb",
-        color: "green-text-gradient",
-      },
-      {
-        name: "tailwind",
-        color: "pink-text-gradient",
-      },
+      { name: "react", color: "blue-text-gradient" },
+      { name: "fastapi", color: "green-text-gradient" },
+      { name: "websockets", color: "pink-text-gradient" },
     ],
-    image: carrent,
-    source_code_link: "https://github.com/",
+    image: secuwatch,
+    source_code_link: "https://github.com/rastogi016/SecuWatch",
+    live_link: "",
   },
+
   {
-    name: "Job IT",
+    name: "Pulse Chat App",
     description:
-      "Web application that enables users to search for job openings, view estimated salary ranges for positions, and locate available jobs based on their current location.",
+      "A modern real-time chat application featuring instant messaging, online status, typing indicators, and a clean responsive UI. Built using Socket.IO and MongoDB for persistent conversations.",
     tags: [
-      {
-        name: "react",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "restapi",
-        color: "green-text-gradient",
-      },
-      {
-        name: "scss",
-        color: "pink-text-gradient",
-      },
+      { name: "react", color: "blue-text-gradient" },
+      { name: "nodejs", color: "green-text-gradient" },
+      { name: "mongodb", color: "pink-text-gradient" },
     ],
-    image: jobit,
-    source_code_link: "https://github.com/",
+    image: pulse,
+    source_code_link: "https://github.com/yash-076/chatapp",
+    live_link: "https://chat-app-nine-azure-45.vercel.app/",
   },
+
   {
-    name: "Trip Guide",
+    name: "Portfolio Website ( This Site )",
     description:
-      "A comprehensive travel booking platform that allows users to book flights, hotels, and rental cars, and offers curated recommendations for popular destinations.",
+      "A personal portfolio showcasing software engineering and cybersecurity work. Includes project sections, animations, and a clean UI built using React and Tailwind CSS.",
     tags: [
-      {
-        name: "nextjs",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "supabase",
-        color: "green-text-gradient",
-      },
-      {
-        name: "css",
-        color: "pink-text-gradient",
-      },
+      { name: "react", color: "blue-text-gradient" },
+      { name: "tailwind", color: "green-text-gradient" },
+      { name: "framer-motion", color: "pink-text-gradient" },
     ],
-    image: tripguide,
-    source_code_link: "https://github.com/",
+    image: portfolio,
+    source_code_link: "https://github.com/yash-076/portfolio",
+    live_link: "https://portfolio-website-seven-plum-26.vercel.app/",
   },
 ];
+
 
 export { services, technologies, experiences, testimonials, projects };

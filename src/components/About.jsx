@@ -46,7 +46,7 @@ const About = () => {
         variants={fadeIn( "", "", 0.1, 1)}
         className='mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]'
       >
-        I'm a skilled software developer with experience in JavaScript and expertise in frameworks like React, Node.js, and Three.js. I'm a quick learner and collaborate closely with clients to create efficient, scalable, and user-friendly solutions that solve real-world problems. Let's work together to bring your ideas to life!
+        I’m a B.Tech IT student with hands-on experience in full-stack web development and cybersecurity projects. I work mainly with JavaScript, React, Node.js, Python, and FastAPI, and I enjoy building real-time applications like dashboards, chat apps, and security tools. I focus on writing clean code, understanding system design fundamentals, and continuously improving my skills through projects and labs.
       </motion.p>
       <div className='mt-20 flex flex-wrap gap-10 justify-center'>
         {services.map((service, index)=>(

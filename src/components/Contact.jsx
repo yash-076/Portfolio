@@ -63,7 +63,7 @@ const Contact = () => {
       >
         <p className={styles.sectionSubText}>Get in touch</p>
         <h3 className={styles.sectionHeadText}>Contact</h3>
-
+        <p>Have a question, opportunity, or want to collaborate? Feel free to reach out — I’m always open to learning and building.</p>
         <form 
           ref={formRef}
           onSubmit={handleSubmit}
