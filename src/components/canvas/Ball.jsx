@@ -1,10 +1,10 @@
-import React, { Suspense, useState, useEffect } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Decal, Float, OrbitControls, Preload, useTexture } from '@react-three/drei'
 import CanvasLoader from '../Loader'
 
 const Ball = (props) => {
-  const [decal] = useTexture([props.imageUrl]);
+  const [texture] = useTexture([props.imageUrl]);
 
   return (
     <Float speed={1.75} rotationIntensity={1} floatIntensity={2}>
@@ -22,7 +22,8 @@ const Ball = (props) => {
           position={[0, 0, 1]}
           rotation={[2 * Math.PI, 0, 6.25]}
           flatShading
-          map={decal}
+          map={texture}
+          castShadow
         />
       </mesh>
     </Float>
@@ -49,27 +50,30 @@ const BallCanvas = ({icon}) =>{
   }, [])
 
   return (
-    <Canvas 
-      frameloop='demand'
-      dpr={isMobile ? 1 : window.devicePixelRatio}
-      gl={{ 
-        preserveDrawingBuffer: true,
-        antialias: !isMobile,
-        powerPreference: isMobile ? 'low-power' : 'high-performance',
-        failIfMajorPerformanceCaveat: false
-      }}
-      style={{ width: '100%', height: '100%', display: 'block' }}
-      onError={(error) => console.error('Canvas error:', error)}
-    >
-      <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls 
-          enableZoom={false}
-        />
-        <Ball imageUrl={icon} />
-      </Suspense>
+    <div style={{ width: '100%', height: '100%', minHeight: '100%' }}>
+      <Canvas 
+        frameloop='demand'
+        dpr={isMobile ? 1 : window.devicePixelRatio}
+        gl={{ 
+          preserveDrawingBuffer: true,
+          antialias: !isMobile,
+          powerPreference: isMobile ? 'low-power' : 'high-performance',
+          failIfMajorPerformanceCaveat: false,
+          alpha: true
+        }}
+        style={{ width: '100%', height: '100%', display: 'block' }}
+      >
+        <color attach="background" args={['#000000']} />
+        <Suspense fallback={<CanvasLoader />}>
+          <OrbitControls 
+            enableZoom={false}
+          />
+          <Ball imageUrl={icon} />
+        </Suspense>
 
-      <Preload all />
-    </Canvas>
+        <Preload all />
+      </Canvas>
+    </div>
   )
 }
 export default BallCanvas

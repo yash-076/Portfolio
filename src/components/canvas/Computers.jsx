@@ -3,31 +3,58 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Preload, useGLTF } from '@react-three/drei';
 import CanvasLoader from '../Loader.jsx'
 
-const Computers = ({ isMobile }) => {
-  const computer  = useGLTF('/desktop_pc/scene.gltf');
+// Preload the model
+useGLTF.preload('/desktop_pc/scene.gltf');
 
-  return (
-    <mesh>
-      <hemisphereLight intensity={isMobile ? 0.4 : 0.5} groundColor='#444' />
-      <ambientLight intensity={isMobile ? 0.3 : 0.5} />
-      <directionalLight
-        castShadow={!isMobile}
-        intensity={isMobile ? 0.7 : 1}
-        position={[5, 10, 5]}
-        shadow-mapSize-width={isMobile ? 512 : 1024}
-        shadow-mapSize-height={isMobile ? 512 : 1024}
-        shadow-camera-near={0.5}
-        shadow-camera-far={50}
-      />
-      <pointLight intensity={isMobile ? 0.5 : 1} />
-      <primitive 
-        object={computer.scene}
-        scale={ isMobile ? 0.7 : 0.75 }
-        position={isMobile ? [ 0, -3, 2.2 ] : [0, -3.25, -1.5]}
-        rotation={[-0.01, 0.2, -0.1]}
-      />
-    </mesh>
-  )
+const Computers = ({ isMobile }) => {
+  try {
+    const gltf = useGLTF('/desktop_pc/scene.gltf');
+
+    if (!gltf || !gltf.scene) {
+      console.warn('GLTF not loaded yet');
+      // Fallback: render a test cube to verify canvas works
+      return (
+        <>
+          <hemisphereLight intensity={0.5} groundColor='#444' />
+          <ambientLight intensity={0.5} />
+          <mesh scale={0.75}>
+            <boxGeometry args={[1, 1, 1]} />
+            <meshPhongMaterial color="#ff0000" />
+          </mesh>
+        </>
+      );
+    }
+
+    console.log('GLTF Loaded successfully');
+
+    return (
+      <>
+        <hemisphereLight intensity={isMobile ? 0.4 : 0.5} groundColor='#444' />
+        <ambientLight intensity={isMobile ? 0.3 : 0.5} />
+        <directionalLight
+          castShadow={!isMobile}
+          intensity={isMobile ? 0.7 : 1}
+          position={[5, 10, 5]}
+          shadow-mapSize-width={isMobile ? 512 : 1024}
+          shadow-mapSize-height={isMobile ? 512 : 1024}
+          shadow-camera-near={0.5}
+          shadow-camera-far={50}
+        />
+        <pointLight intensity={isMobile ? 0.5 : 1} />
+        <group scale={isMobile ? 0.7 : 0.75} position={isMobile ? [0, -3, 2.2] : [0, -3.25, -1.5]} rotation={[-0.01, 0.2, -0.1]}>
+          <primitive object={gltf.scene} dispose={null} />
+        </group>
+      </>
+    )
+  } catch (error) {
+    console.error('Error in Computers component:', error);
+    return (
+      <>
+        <hemisphereLight intensity={0.5} />
+        <ambientLight intensity={0.5} />
+      </>
+    );
+  }
 }
 
 
@@ -68,7 +95,7 @@ const ComputersCanvas = () => {
   }
 
   return (
-    <div className='absolute inset-0 w-full h-full'>
+    <div className='absolute inset-0 w-full h-full bg-black'>
       <Canvas 
         frameloop='demand'
         shadows={!isMobile}
@@ -78,11 +105,12 @@ const ComputersCanvas = () => {
           preserveDrawingBuffer: true,
           antialias: !isMobile,
           powerPreference: isMobile ? 'low-power' : 'high-performance',
-          failIfMajorPerformanceCaveat: false
+          failIfMajorPerformanceCaveat: false,
+          alpha: true
         }}
         style={{ width: '100%', height: '100%', display: 'block' }}
-        onError={(error) => console.error('Canvas error:', error)}
       >
+        <color attach="background" args={['#000000']} />
         <Suspense fallback={<CanvasLoader />}>
           <OrbitControls 
             enableZoom={false} 
