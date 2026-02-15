@@ -33,16 +33,18 @@ const BallCanvas = ({icon}) =>{
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 500px)');
-    setIsMobile(mediaQuery.matches);
+    // Check if mobile on mount
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 500);
+    };
 
-    const handleMediaQueryChange = (event) => {
-      setIsMobile(event.matches);
-    }
+    checkMobile();
 
-    mediaQuery.addEventListener('change', handleMediaQueryChange);
+    // Listen for resize events
+    window.addEventListener('resize', checkMobile);
+
     return () => {
-      mediaQuery.removeEventListener('change', handleMediaQueryChange);
+      window.removeEventListener('resize', checkMobile);
     }
   }, [])
 
@@ -53,9 +55,11 @@ const BallCanvas = ({icon}) =>{
       gl={{ 
         preserveDrawingBuffer: true,
         antialias: !isMobile,
-        powerPreference: isMobile ? 'low-power' : 'high-performance'
+        powerPreference: isMobile ? 'low-power' : 'high-performance',
+        failIfMajorPerformanceCaveat: false
       }}
       style={{ width: '100%', height: '100%', display: 'block' }}
+      onError={(error) => console.error('Canvas error:', error)}
     >
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls 

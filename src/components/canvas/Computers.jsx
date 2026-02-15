@@ -41,25 +41,21 @@ const ComputersCanvas = () => {
     const webgl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
     if (!webgl) {
       setWebGLSupported(false);
+      return;
     }
 
-    // Add a listener for changes to the screen size
-    const mediaQuery = window.matchMedia('(max-width: 500px)');
+    // Check if mobile on mount
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 500);
+    };
 
-    // Set the initial value of the 'isMobile state variable
-    setIsMobile(mediaQuery.matches);
+    checkMobile();
 
-    // Define a callback function to handle change to the media query
-    const handleMediaQueryChange = (event) => {
-      setIsMobile(event.matches);
-    }
+    // Listen for resize events
+    window.addEventListener('resize', checkMobile);
 
-    // Add the callback function as a listener for changes to the media query
-    mediaQuery.addEventListener('change', handleMediaQueryChange);
-
-    // Remove the listener when the component is unmounted 
-    return ()=>{
-      mediaQuery.removeEventListener('change', handleMediaQueryChange);
+    return () => {
+      window.removeEventListener('resize', checkMobile);
     }
   }, [])
 
@@ -72,18 +68,20 @@ const ComputersCanvas = () => {
   }
 
   return (
-    <div className='w-full h-screen'>
+    <div className='absolute inset-0 w-full h-full'>
       <Canvas 
         frameloop='demand'
         shadows={!isMobile}
         dpr={isMobile ? 1 : window.devicePixelRatio}
-        camera={{ position: [20, 3, 5], fov: 25 }}
+        camera={{ position: isMobile ? [20, 3, 8] : [20, 3, 5], fov: isMobile ? 30 : 25 }}
         gl={{ 
           preserveDrawingBuffer: true,
           antialias: !isMobile,
-          powerPreference: isMobile ? 'low-power' : 'high-performance'
+          powerPreference: isMobile ? 'low-power' : 'high-performance',
+          failIfMajorPerformanceCaveat: false
         }}
         style={{ width: '100%', height: '100%', display: 'block' }}
+        onError={(error) => console.error('Canvas error:', error)}
       >
         <Suspense fallback={<CanvasLoader />}>
           <OrbitControls 
