@@ -1,0 +1,26 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="32" y1="24" x2="224" y2="232" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A78BFA"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="chip" x1="74" y1="72" x2="182" y2="184" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1F2937"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="24" y="24" width="208" height="208" rx="52" fill="url(#bg)"/>
+
+  <rect x="74" y="72" width="108" height="112" rx="22" fill="url(#chip)" stroke="white" stroke-opacity="0.18" stroke-width="2"/>
+
+  <path d="M106 108L95 118L106 128" stroke="#C4B5FD" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M150 108L161 118L150 128" stroke="#C4B5FD" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="102" y="144" width="52" height="8" rx="4" fill="#EDE9FE"/>
+
+  <rect x="58" y="102" width="10" height="18" rx="5" fill="#DDD6FE"/>
+  <rect x="58" y="132" width="10" height="18" rx="5" fill="#DDD6FE"/>
+  <rect x="188" y="102" width="10" height="18" rx="5" fill="#DDD6FE"/>
+  <rect x="188" y="132" width="10" height="18" rx="5" fill="#DDD6FE"/>
+</svg>

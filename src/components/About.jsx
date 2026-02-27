@@ -46,7 +46,7 @@ const About = () => {
         variants={fadeIn( "", "", 0.1, 1)}
         className='mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]'
       >
-        I’m a B.Tech IT student with hands-on experience in full-stack web development and cybersecurity projects. I work mainly with JavaScript, React, Node.js, Python, and FastAPI, and I enjoy building real-time applications like dashboards, chat apps, and security tools. I focus on writing clean code, understanding system design fundamentals, and continuously improving my skills through projects and labs.
+        I’m a B.Tech IT student with hands-on experience in full-stack software development. I work mainly with JavaScript, React, Node.js, Python, and FastAPI, and I enjoy building real-time applications like dashboards, chat apps, and developer-focused web platforms. I focus on writing clean code, understanding system design fundamentals, and continuously improving my engineering skills through projects and labs.
       </motion.p>
       <div className='mt-20 flex flex-wrap gap-10 justify-center'>
         {services.map((service, index)=>(

@@ -1,7 +1,7 @@
 import {
-  cybersecurity,
   fullstack,
   Soc,
+  backend,
   web,
 
   html,
@@ -15,9 +15,9 @@ import {
   mongodb,
   git,
 
-  soc,
+  problemSolving,
   threatsage,
-  
+  rolesync,
   secuwatch,
   pulse,
   portfolio,
@@ -40,7 +40,7 @@ export const navLinks = [
 
 const services = [
   {
-    title: "Web Developer",
+    title: "Software Development Engineer",
     icon: web,
   },
   {
@@ -48,11 +48,11 @@ const services = [
     icon: fullstack,
   },
   {
-    title: "Cybersecurity Learner",
-    icon: cybersecurity,
+    title: "Backend & API Developer",
+    icon: backend,
   },
   {
-    title: "SOC & Threat Detection Enthusiast",
+    title: "Data Structures & Algorithms",
     icon: Soc,
   },
 ];
@@ -109,29 +109,29 @@ const technologies = [
 
 const experiences = [
   {
-    title: "Founder / Developer",
-    company_name: "ThreatSage (Personal Project)",
+    title: "Software Development Engineer (Projects)",
+    company_name: "Personal Engineering Work",
     icon: threatsage,
     iconBg: "#383E56",
     date: "Jun 2025 - Present",
     points: [
-      "Created SecuWatch — a real-time cybersecurity dashboard that ingests alerts, streams them over WebSockets, and visualizes threat analytics.",
-      "Built backend alert ingestion and broadcasting components (Python + FastAPI) and the React + Tailwind frontend for alert triage and filtering.",
-      "Designed analytics pages (timeline, severity breakdown, top IPs/URLs/hashes) and implemented alert status flows (New → In Progress → Resolved).",
-      "Worked on integrating file-based alert producers with the dashboard and planned migration to MongoDB for persistent storage.",
+      "Built and shipped end-to-end full-stack applications with modular architecture, clean component design, and production-focused code quality.",
+      "Developed backend services (Python + FastAPI / Node.js) and responsive React + Tailwind frontends with reusable UI patterns.",
+      "Implemented real-time communication features using WebSockets/Socket.IO and optimized state handling for smooth user experience.",
+      "Designed scalable data flows and integrated MongoDB-based persistence for reliable data storage and retrieval.",
     ],
   },
 
   {
-    title: "SOC Learner",
-    company_name: "Self-driven Labs & Courses",
-    icon: soc, 
+    title: "Problem Solving & Core CS",
+    company_name: "Self-driven Practice",
+    icon: problemSolving, 
     iconBg: "#383E56",
     date: "2024 - Present",
     points: [
-      "Completed Practical Ethical Hacking (TCM), Linux Fundamentals (TCM), Ethical Hacking (Cisco), and Introduction to Cybersecurity (Cisco).",
-      "Built hands-on tools: Real-Time Log Analyzer, Domain Recon Automation, Port Scanner, and Network Sniffer for learning and SOC practice.",
-      "Performed log analysis with Splunk, developed detection rules, and practiced blue-team workflows and incident triage.",
+      "Practiced data structures and algorithms regularly with focus on arrays, strings, trees, graphs, dynamic programming, and greedy techniques.",
+      "Strengthened core CS fundamentals including OOP, DBMS, operating systems, and computer networks through project-driven learning.",
+      "Improved debugging and code-review workflow by writing clean, testable modules and following consistent engineering standards.",
     ],
   },
 ];
@@ -166,9 +166,9 @@ const testimonials = [
 
 const projects = [
   {
-    name: "SecuWatch v1.1",
+    name: "Realtime Event Monitoring Platform",
     description:
-      "A real-time cybersecurity monitoring dashboard that visualizes alerts, supports WebSocket live updates, alert acknowledgment, export features, and threat analytics. Built under the ThreatSage ecosystem.",
+      "A real-time monitoring dashboard that supports live event updates, status transitions, exports, and analytics visualizations with a scalable full-stack architecture.",
     tags: [
       { name: "react", color: "blue-text-gradient" },
       { name: "fastapi", color: "green-text-gradient" },
@@ -196,7 +196,7 @@ const projects = [
   {
     name: "Portfolio Website ( This Site )",
     description:
-      "A personal portfolio showcasing software engineering and cybersecurity work. Includes project sections, animations, and a clean UI built using React and Tailwind CSS.",
+      "A personal portfolio showcasing software engineering projects, skills, and experience with smooth animations and a clean React + Tailwind interface.",
     tags: [
       { name: "react", color: "blue-text-gradient" },
       { name: "tailwind", color: "green-text-gradient" },
@@ -205,6 +205,20 @@ const projects = [
     image: portfolio,
     source_code_link: "https://github.com/yash-076/portfolio",
     live_link: "https://portfolio-website-seven-plum-26.vercel.app/",
+  },
+  {
+    name: "RoleSync - AI Job Aggregator",
+    description:
+      "A full-stack AI-powered job aggregation platform that fetches jobs from APIs and company career pages, normalizes and deduplicates listings, and performs resume–JD matching using embeddings and similarity scoring. Features real-time updates, Redis caching, PostgreSQL storage, and a modern React + Tailwind interface.",
+    tags: [
+      { name: "fastapi", color: "green-text-gradient" },
+      { name: "react", color: "blue-text-gradient" },
+      { name: "postgresql", color: "pink-text-gradient" },
+      { name: "redis", color: "orange-text-gradient" },
+    ],
+    image: rolesync,
+    source_code_link: "https://github.com/yash-076/job-aggregator",
+    live_link: "https://job-aggregator-roan.vercel.app/",
   },
 ];
 

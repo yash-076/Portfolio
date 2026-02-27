@@ -1,7 +1,7 @@
 # 🌐 Personal Portfolio Website
 
 This repository contains the source code for my personal portfolio website.  
-It showcases my skills, projects, and experience in **Software Development** and **Cybersecurity**, along with ways to connect with me.
+It showcases my skills, projects, and experience in **Software Development**, along with ways to connect with me.
 
 ## 🚀 Live Demo
 🔗 **Portfolio:** https://portfolio-website-seven-plum-26.vercel.app/
@@ -13,7 +13,7 @@ It showcases my skills, projects, and experience in **Software Development** and
 This portfolio is designed to present:
 - My technical skills and interests
 - Selected projects with practical, real-world use cases
-- My learning journey in software development and cybersecurity
+- My learning journey in software development
 - Easy ways to get in touch with me
 
 The site focuses on being **clean, responsive, and performance-oriented**.
@@ -48,7 +48,7 @@ The site focuses on being **clean, responsive, and performance-oriented**.
 ## 🚧 Projects
 
 ### 🛡️ SecuWatch
-A real-time cybersecurity monitoring and alert visualization platform.
+A real-time event monitoring and analytics platform.
 
 **Key Features**
 - Real-time alert ingestion and streaming using WebSockets
@@ -58,9 +58,9 @@ A real-time cybersecurity monitoring and alert visualization platform.
 - Frontend built using **React & Tailwind CSS**
 
 **Focus Areas**
-- SOC-style monitoring
-- Threat detection & response workflows
-- Scalable real-time systems
+- Dashboard engineering and data visualization
+- Real-time event streaming workflows
+- Scalable full-stack system design
 
 
 ### 💬 Pulse ChatApp
