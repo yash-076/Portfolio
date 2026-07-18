@@ -147,6 +147,16 @@
   transition: color var(--transition);
 }
 
+.why-btn-icon {
+  display: inline-block;
+  margin-right: 0.3rem;
+  transition: transform var(--transition);
+}
+
+.why-btn.active .why-btn-icon {
+  transform: rotate(90deg);
+}
+
 .why-btn:hover,
 .why-btn.active {
   color: var(--gold-light);

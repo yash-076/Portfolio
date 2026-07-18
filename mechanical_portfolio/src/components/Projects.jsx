@@ -244,7 +244,7 @@ export default function Projects() {
                     className={`project-link why-btn ${openWhy === p.num ? 'active' : ''}`}
                     onClick={() => setOpenWhy(openWhy === p.num ? null : p.num)}
                   >
-                    ▸ Why Built
+                    <span className="why-btn-icon">▸</span> Why Built
                   </button>
                 </div>
               </div>
