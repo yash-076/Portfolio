@@ -10,7 +10,6 @@
   border: 1px solid var(--border);
   padding: 2rem;
   position: relative;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   transition: border-color var(--transition), transform var(--transition);
@@ -121,3 +120,113 @@
 @media (max-width: 580px) {
   .projects-grid { grid-template-columns: 1fr; }
 }
+
+/* ── Why Built Button ── */
+.why-trigger-wrapper {
+  position: relative;
+}
+
+.why-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  transition: color var(--transition);
+}
+
+.why-btn:hover,
+.why-btn.active {
+  color: var(--gold-light);
+}
+
+/* ── Why Built Popup ── */
+.why-popup {
+  position: absolute;
+  left: 0;
+  z-index: 100;
+  width: clamp(280px, 90vw, 420px);
+  background: #0d0d0d;
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.8);
+  animation: popupFadeIn 0.18s ease;
+}
+
+@keyframes popupFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.why-popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.85rem;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+  background: rgba(201, 168, 76, 0.04);
+}
+
+.why-popup-title {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.why-popup-close {
+  background: none;
+  border: none;
+  color: var(--white-dimmer);
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: color var(--transition);
+}
+
+.why-popup-close:hover { color: var(--gold); }
+
+.why-popup-body {
+  position: relative;
+  max-height: 240px;
+  overflow: hidden; /* Bound layout dimensions to sizer */
+}
+
+.why-text-sizer {
+  padding: 0.85rem;
+}
+
+.why-text-sizer p {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.8;
+  margin-bottom: 0.75rem;
+}
+.why-text-sizer p:last-child { margin-bottom: 0; }
+
+.why-text-scroll-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.85rem;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 168, 76, 0.2) transparent;
+}
+
+.why-text-scroll-container p {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--white-dim);
+  line-height: 1.8;
+  margin-bottom: 0.75rem;
+}
+
+.why-text-scroll-container p:last-child { margin-bottom: 0; }
+
