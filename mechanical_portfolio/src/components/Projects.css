@@ -1,5 +1,3 @@
-
-
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -23,18 +21,23 @@
 /* Animated top gold line */
 .project-top-line {
   position: absolute;
-  top: 0; left: 0;
-  width: 0%; height: 2px;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
   background: var(--gold);
   transition: width 0.45s ease;
 }
 
-.project-card:hover .project-top-line { width: 100%; }
+.project-card:hover .project-top-line {
+  width: 100%;
+}
 
 /* Ghost number */
 .project-number {
   position: absolute;
-  top: 1.25rem; right: 1.5rem;
+  top: 1.25rem;
+  right: 1.5rem;
   font-family: var(--font-display);
   font-size: 5rem;
   color: rgba(240, 237, 232, 0.03);
@@ -92,7 +95,7 @@
   font-size: 0.65rem;
   color: var(--white-dimmer);
   background: var(--surface);
-  border: 1px solid rgba(201,168,76,0.1);
+  border: 1px solid rgba(201, 168, 76, 0.1);
   padding: 0.2rem 0.5rem;
 }
 
@@ -111,14 +114,20 @@
   transition: color var(--transition);
 }
 
-.project-link:hover { color: var(--gold-light); }
+.project-link:hover {
+  color: var(--gold-light);
+}
 
 @media (max-width: 900px) {
-  .projects-grid { grid-template-columns: 1fr 1fr; }
+  .projects-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media (max-width: 580px) {
-  .projects-grid { grid-template-columns: 1fr; }
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ── Why Built Button ── */
@@ -146,9 +155,13 @@
 /* ── Why Built Popup ── */
 .why-popup {
   position: absolute;
-  left: 0;
+  left: 63%;
+  bottom: 3rem;
+  /* Sit cleanly above the CTA links */
+  transform: translate(-50%, 0);
   z-index: 100;
-  width: clamp(280px, 90vw, 420px);
+  width: 400px;
+  max-width: 92vw;
   background: #0d0d0d;
   border: 1px solid rgba(201, 168, 76, 0.35);
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.8);
@@ -156,8 +169,15 @@
 }
 
 @keyframes popupFadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translate(-50%, 6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
 }
 
 .why-popup-header {
@@ -188,12 +208,16 @@
   transition: color var(--transition);
 }
 
-.why-popup-close:hover { color: var(--gold); }
+.why-popup-close:hover {
+  color: var(--gold);
+}
 
 .why-popup-body {
   position: relative;
-  max-height: 300px; /* Increased height for desktop */
-  overflow: hidden; /* Bound layout dimensions to sizer */
+  max-height: 300px;
+  /* Increased height for desktop */
+  overflow: hidden;
+  /* Bound layout dimensions to sizer */
 }
 
 .why-text-sizer {
@@ -206,7 +230,10 @@
   line-height: 1.8;
   margin-bottom: 0.75rem;
 }
-.why-text-sizer p:last-child { margin-bottom: 0; }
+
+.why-text-sizer p:last-child {
+  margin-bottom: 0;
+}
 
 .why-text-scroll-container {
   position: absolute;
@@ -228,19 +255,24 @@
   margin-bottom: 0.75rem;
 }
 
-.why-text-scroll-container p:last-child { margin-bottom: 0; }
+.why-text-scroll-container p:last-child {
+  margin-bottom: 0;
+}
 
-/* ── Mobile Absolute Popup Adjustments ── */
+/* ── Mobile Overrides ── */
 @media (max-width: 600px) {
   .why-popup {
-    left: auto !important;
-    right: 0 !important; /* Anchor to right side to grow leftwards */
-    width: 420px !important; /* 50% increase from 280px */
-    max-width: 92vw !important;
+    left: 54% !important;
+    /* Force center horizontally on mobile */
+    bottom: 4rem !important;
+    /* Position slightly higher above mobile links */
+    width: 90vw !important;
+    /* Safe mobile viewport width constraints */
+    transform: translate(-50%, 0) !important;
   }
 
   .why-popup-body {
-    max-height: 264px !important; /* 20% increase from 220px */
+    max-height: 270px !important;
+    /* Shorter scroll area for mobile screens */
   }
 }
-

@@ -11,7 +11,11 @@ const PROJECTS = [
     tech: ['FastAPI', 'React.js', 'PostgreSQL', 'Apache Kafka', 'Redis', 'WebSockets', 'JWT', 'Tailwind CSS'],
     github: 'https://github.com/yash-076/SecuWatch2.0',
     live: 'https://secuwatch-dashboard.vercel.app/',
-    why: `I built SecuWatch 2.0 because I wanted to understand what it actually takes to build a real-time monitoring system at scale — not just the frontend, but the full pipeline from raw log ingestion to alert delivery. Most tutorial projects stop at CRUD; I wanted to go deeper into event-driven architecture, so I designed the entire stack myself using Kafka for message queuing, Redis Pub/Sub for broadcast, and WebSockets to push alerts live to the dashboard.\n\nThe security domain made it interesting because the requirements are non-negotiable — missed alerts, duplicates, or latency can mean real consequences. That constraint pushed me to think carefully about deduplication, ordering guarantees, and fault tolerance. It became less about "building a project" and more about reasoning through tradeoffs that senior engineers face every day.`,
+    why: `I built SecuWatch because I wanted to understand how modern SIEM platforms work beyond simple log parsing. The first version was just a Python script that analyzed logs. As I learned more, I added a web dashboard with MongoDB and WebSockets to visualize alerts in real time. While building it, I started asking practical questions: What happens if thousands of logs arrive within a second? How do you prevent the backend from becoming a bottleneck? How do you ensure alerts aren't lost?
+
+    Those questions led me to redesign the system multiple times. The latest version uses an event-driven architecture with Kafka to decouple log ingestion from alert processing, Redis for caching frequently accessed data like agent authentication and AI-generated explanations, and Redis Pub/Sub with WebSockets to deliver only relevant alerts to connected users. I also implemented alert deduplication, RBAC for organizations, filtering, AI-powered alert explanations and mitigation suggestions, and other features inspired by real-world security platforms.
+
+    More than just a cybersecurity project, SecuWatch became my way of learning how to design scalable, low-latency distributed systems by continuously identifying bottlenecks and improving the architecture.`,
   },
   {
     num: '02',
@@ -22,21 +26,14 @@ const PROJECTS = [
     tech: ['FastAPI', 'React.js', 'PostgreSQL', 'Redis', 'APScheduler', 'SHA-256'],
     github: 'https://github.com/yash-076/job-aggregator',
     live: 'https://job-aggregator-roan.vercel.app/',
-    why: `I built RoleSync out of personal frustration — job hunting is noisy, repetitive, and full of irrelevant listings. I wanted a system that could intelligently match a resume to the right roles, not just keyword-match, but semantically understand what a candidate is actually about.\n\nThe interesting engineering challenge was building a hybrid ranking system that combines vector embeddings with keyword scoring without making it feel like a black box. I also added Redis caching to keep search fast under concurrent load, and an APScheduler-based scraper to keep listings fresh. It was the first project where I had to think seriously about data freshness, cache invalidation, and search relevance as first-class problems.`,
+    why: `While searching for internships and new graduate roles, I realized how fragmented the process was. Every company had its own careers page, job openings were scattered across different platforms, and keeping track of everything meant checking dozens of websites every day. I wanted a single place where I could discover relevant opportunities without worrying about missing an important opening.
+
+    That idea became RoleSync. My long-term vision is to automatically aggregate jobs directly from company career pages and notify users the moment a relevant position becomes available. In the current version, I use the Adzuna API, which is refreshed every couple of hours, to provide a unified job feed while I continue working toward direct career-page integration.
+
+    Beyond solving a problem I personally faced, the project gave me the opportunity to build scalable backend services, implement personalized job alerts, and design a system that can evolve into a real-time job aggregation platform.`,
   },
   {
     num: '03',
-    title: 'Pulse',
-    subtitle: 'Real-Time Chat Application',
-    date: 'Oct 2025',
-    desc: 'Full-stack real-time messaging platform supporting multiple concurrent users. Event-driven WebSocket communication for low-latency messaging, REST APIs for auth and user management, and MongoDB schemas with efficient querying.',
-    tech: ['MongoDB', 'Express.js', 'React', 'Node.js', 'WebSockets', 'TailwindCSS'],
-    github: 'https://github.com/yash-076/ChatApp',
-    live: 'https://chat-app-nine-azure-45.vercel.app/',
-    why: `Pulse was my first serious attempt at building something that had to work in real time for multiple users simultaneously. I wanted to understand how WebSocket connections behave under concurrent load, how to manage rooms, handle disconnects gracefully, and ensure message ordering doesn't break.\n\nBeyond the technical side, I built it because real-time systems are everywhere — in chat, in collaborative tools, in dashboards — and I felt like I couldn't claim to understand distributed systems without having shipped something that required genuine event-driven thinking. Pulse gave me that foundation.`,
-  },
-  {
-    num: '04',
     title: 'GoShort',
     subtitle: 'High-Performance URL Shortener',
     date: 'Jun 2026 – Ongoing',
@@ -44,7 +41,26 @@ const PROJECTS = [
     tech: ['Golang', 'REST APIs', 'net/http', 'JSON', 'MD5 Hashing'],
     github: 'https://github.com/yash-076/Url-shortner',
     live: null,
-    why: `I built GoShort specifically to learn Go from the ground up — not through tutorials, but by solving a real problem with it. URL shorteners are deceptively simple on the surface but introduce interesting questions: how do you guarantee uniqueness at scale? What's the right tradeoff between hashing speed and collision risk? How does Go's concurrency model compare to Python's async?\n\nUsing only the standard library was a deliberate constraint. I didn't want abstractions hiding how Go actually handles HTTP routing, JSON serialization, or concurrent request handling. The project is still evolving — I'm planning to add persistence and a proper analytics layer next.`,
+    why: `I built GoShort primarily to learn the Go programming language by implementing a project that is simple in concept but interesting from a system design perspective. A URL shortener touches several backend concepts, including routing, hashing, storage, and efficient lookups, making it a great way to become comfortable with Go while building something practical.
+
+    For the current version, I generate short URLs by taking the first five characters of an MD5 hash of the original URL. While this works well for smaller datasets, building the project helped me realize the limitations of this approach. As the number of URLs grows, hash prefix collisions become increasingly likely, making the system unsuitable for large-scale production use.
+
+    If I continue developing the project, I'd replace the hashing strategy with a scalable ID generation approach, such as distributed sequence generators or Base62-encoded IDs, to guarantee uniqueness and support millions of URLs. More than the implementation itself, the project helped me understand the trade-offs involved in designing scalable backend systems.`,
+  },
+  {
+    num: '04',
+    title: 'Pulse',
+    subtitle: 'Real-Time Chat Application',
+    date: 'Oct 2025',
+    desc: 'Full-stack real-time messaging platform supporting multiple concurrent users. Event-driven WebSocket communication for low-latency messaging, REST APIs for auth and user management, and MongoDB schemas with efficient querying.',
+    tech: ['MongoDB', 'Express.js', 'React', 'Node.js', 'WebSockets', 'TailwindCSS'],
+    github: 'https://github.com/yash-076/ChatApp',
+    live: 'https://chat-app-nine-azure-45.vercel.app/',
+    why: `I built Pulse because I wanted to understand how real-time communication works beyond sending simple HTTP requests. Messaging applications feel instantaneous to users, but behind that experience are persistent connections, event-driven communication, and message synchronization between multiple clients. I wanted to explore how these systems work under the hood.
+
+    Building Pulse gave me hands-on experience with WebSockets, real-time event handling, user presence, and reliable message delivery. Instead of treating it as just another chat application, I focused on understanding the architecture required to keep conversations synchronized across connected users while maintaining a responsive experience.
+
+    The project helped me gain a deeper understanding of real-time system design and strengthened my backend development skills, which later proved valuable while building larger projects like SecuWatch.`,
   },
   {
     num: '05',
@@ -55,7 +71,11 @@ const PROJECTS = [
     tech: ['React', 'Vite', 'Tailwind CSS', 'Framer Motion'],
     github: 'https://github.com/yash-076/Olive',
     live: 'https://olive-frontend-rho.vercel.app/',
-    why: `Olive started as an exercise in front-end craft — I wanted to push myself on animations, layout polish, and visual storytelling without the complexity of a full backend. Product landing pages look simple but are actually difficult to get right: the spacing, the motion timing, the way content reveals on scroll.\n\nI used Framer Motion for the first time here and learned how much the right animation curve changes the feel of a page. It's a smaller project by scope, but it sharpened my eye for design-engineering intersection — which I think is underrated in backend-focused developers.`,
+    why: `I built Olive as part of a frontend assignment during a hiring process. The goal was to recreate a modern landing page and mobile application interface using React while staying faithful to the original design.
+
+    Working on the project taught me that building great user interfaces is much more challenging than it initially appears. Achieving a polished look required careful attention to responsive layouts, component reusability, spacing, typography, animations, and visual consistency across the entire page.
+
+    Although my primary focus is backend engineering, Olive helped me appreciate the level of detail that goes into frontend development and improved my ability to translate high-fidelity designs into responsive, pixel-accurate interfaces.`,
   },
 ]
 
@@ -89,42 +109,44 @@ function useTypewriter(text, active) {
   return { displayed, done }
 }
 
-function WhyPopup({ text, onClose, triggerRef }) {
+// Highlights core engineering keywords in golden color
+const highlightKeywords = (text) => {
+  const keywords = [
+    'SecuWatch', 'RoleSync', 'GoShort', 'Pulse', 'Olive',
+    'Kafka', 'Redis', 'WebSockets', 'MongoDB', 'PostgreSQL', 'APIs', 'Adzuna API',
+    'distributed systems', 'SIEM platforms', 'system design', 'event-driven architecture',
+    'caching', 'low-latency', 'Go', 'React', 'Python', 'Framer Motion', 'hashing'
+  ]
+
+  const sortedKeywords = [...keywords].sort((a, b) => b.length - a.length)
+  const pattern = sortedKeywords.map(k => k.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')).join('|')
+  const regex = new RegExp(`\\b(${pattern})\\b`, 'gi')
+
+  const parts = text.split(regex)
+  return parts.map((part, index) => {
+    if (keywords.some(kw => kw.toLowerCase() === part.toLowerCase())) {
+      return <strong key={index} style={{ color: 'var(--gold)', fontWeight: '600' }}>{part}</strong>
+    }
+    return part
+  })
+}
+
+function WhyPopup({ text, onClose }) {
   const { displayed } = useTypewriter(text, true)
   const popupRef = useRef(null)
-
-  // Position popup above or below trigger based on screen space
-  useEffect(() => {
-    if (!popupRef.current || !triggerRef.current) return
-    const triggerRect = triggerRef.current.getBoundingClientRect()
-    const popup = popupRef.current
-    const spaceBelow = window.innerHeight - triggerRect.bottom
-    const spaceAbove = triggerRect.top
-
-    if (spaceBelow < 260 && spaceAbove > spaceBelow) {
-      popup.style.bottom = '100%'
-      popup.style.top = 'auto'
-      popup.style.marginBottom = '0.5rem'
-      popup.style.marginTop = '0'
-    } else {
-      popup.style.top = '100%'
-      popup.style.bottom = 'auto'
-      popup.style.marginTop = '0.5rem'
-      popup.style.marginBottom = '0'
-    }
-  }, [triggerRef])
 
   // Close on outside click
   useEffect(() => {
     const handler = (e) => {
-      if (popupRef.current && !popupRef.current.contains(e.target) &&
-        triggerRef.current && !triggerRef.current.contains(e.target)) {
+      if (popupRef.current && !popupRef.current.contains(e.target)) {
+        // Also don't close if we clicked a "Why Built" button
+        if (e.target.closest('.why-btn')) return
         onClose()
       }
     }
     document.addEventListener('mousedown', handler)
     return () => document.removeEventListener('mousedown', handler)
-  }, [onClose, triggerRef])
+  }, [onClose])
 
   return (
     <div ref={popupRef} className="why-popup">
@@ -136,13 +158,13 @@ function WhyPopup({ text, onClose, triggerRef }) {
         {/* Invisible sizer to lock box dimensions instantly when mounting */}
         <div className="why-text-sizer" style={{ opacity: 0, pointerEvents: 'none', userSelect: 'none' }}>
           {text.split('\n\n').map((para, i) => (
-            <p key={i}>{para}</p>
+            <p key={i}>{highlightKeywords(para)}</p>
           ))}
         </div>
         {/* Absolute-overlay typing text content */}
         <div className="why-text-scroll-container">
           {displayed.split('\n\n').map((para, i) => (
-            <p key={i}>{para}</p>
+            <p key={i}>{highlightKeywords(para)}</p>
           ))}
         </div>
       </div>
@@ -153,7 +175,6 @@ function WhyPopup({ text, onClose, triggerRef }) {
 export default function Projects() {
   const [openWhy, setOpenWhy] = useState(null) // project num of open popup
   const [revealed, setRevealed] = useState({})
-  const triggerRefs = useRef({})
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -220,21 +241,20 @@ export default function Projects() {
                 )}
                 <div className="why-trigger-wrapper">
                   <button
-                    ref={(el) => { triggerRefs.current[p.num] = el }}
                     className={`project-link why-btn ${openWhy === p.num ? 'active' : ''}`}
                     onClick={() => setOpenWhy(openWhy === p.num ? null : p.num)}
                   >
                     ▸ Why Built
                   </button>
-                  {openWhy === p.num && (
-                    <WhyPopup
-                      text={p.why}
-                      onClose={() => setOpenWhy(null)}
-                      triggerRef={{ current: triggerRefs.current[p.num] }}
-                    />
-                  )}
                 </div>
               </div>
+
+              {openWhy === p.num && (
+                <WhyPopup
+                  text={p.why}
+                  onClose={() => setOpenWhy(null)}
+                />
+              )}
             </div>
           ))}
         </div>

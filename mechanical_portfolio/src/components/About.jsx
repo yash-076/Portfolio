@@ -19,7 +19,7 @@ export default function About() {
                 {'  '}<span className="prop">name</span><span className="op">:</span>       <span className="str">"Yash Rastogi"</span><span className="punc">,</span>{'\n'}
                 {'  '}<span className="prop">university</span><span className="op">:</span>  <span className="str">"HBTU, Kanpur"</span><span className="punc">,</span>{'\n'}
                 {'  '}<span className="prop">degree</span><span className="op">:</span>     <span className="str">"B.Tech IT"</span><span className="punc">,</span>{'\n'}
-                {'  '}<span className="prop">batch</span><span className="op">:</span>      <span className="str">"2023 – 2027"</span><span className="punc">,</span>{'\n'}
+                {'  '}<span className="prop">batch</span><span className="op">:</span>      <span className="str">"2023 - 2027"</span><span className="punc">,</span>{'\n'}
                 {'  '}<span className="prop">focus</span><span className="op">:</span> <span className="punc">[</span>{'\n'}
                 {'    '}<span className="str">"Backend Development"</span><span className="punc">,</span>{'\n'}
                 {'    '}<span className="str">"System Architecture"</span><span className="punc">,</span>{'\n'}
@@ -55,6 +55,9 @@ export default function About() {
               </a>
               <a href="https://www.linkedin.com/in/yashrastogi11/" target="_blank" rel="noreferrer" className="about-link">
                 ↗ LinkedIn
+              </a>
+              <a href="https://leetcode.com/u/Yash955/" target="_blank" rel="noreferrer" className="about-link">
+                ↗ LeetCode
               </a>
               <a href="mailto:smediayash@gmail.com" className="about-link">
                 ↗ Email

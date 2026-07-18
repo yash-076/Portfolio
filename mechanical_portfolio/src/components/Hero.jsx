@@ -19,7 +19,7 @@ const PATHS = {
   'path-dedupe-kafka': 'M 245 27.5 L 255 27.5 L 255 45 L 165 45 L 165 67.5 L 175 67.5',
   'path-kafka-pub': 'M 245 67.5 L 255 67.5 Q 260 67.5 260 62.5 L 265 62.5',
   'path-pub-postgres': 'M 290 75 L 290 90',
-  'path-postgres-ws': 'M 290 115 L 290 130',
+  'path-pub-ws': 'M 290 75 L 255 75 Q 250 75 250 80 L 250 135 Q 250 142.5 260 142.5 L 265 142.5',
   'path-ws-dashboard': 'M 265 145 L 250 145 Q 240 145 240 165 L 240 170 L 235 170',
 }
 
@@ -72,7 +72,7 @@ function useTypewriter(words) {
     } else if (deleting && charIdx === 0) {
       setDeleting(false)
       setWordIdx((i) => (i + 1) % words.length)
-      timeout = setTimeout(() => {}, 400)
+      timeout = setTimeout(() => { }, 400)
     } else {
       const next = deleting ? charIdx - 1 : charIdx + 1
       timeout = setTimeout(() => {
@@ -105,7 +105,7 @@ export default function Hero() {
   const spawnPacket = (pathKey, color, durMs) => {
     const packetId = Date.now() + Math.random()
     const pathString = PATHS[pathKey]
-    
+
     setActivePackets(prev => [...prev, {
       id: packetId,
       path: pathString,
@@ -162,7 +162,7 @@ export default function Hero() {
 
     setTimeout(() => {
       setTerminalLogs(prev => [...prev,
-        `[ENGINE] Match in ${sc.engine}: ${sc.match}! [${sc.severity}]`,
+      `[ENGINE] Match in ${sc.engine}: ${sc.match}! [${sc.severity}]`,
         `[ENGINE] Forwarding alert to Redis Dedup Cache...`
       ])
       spawnPacket('path-engine-dedupe', '#FF4A4A', 1500)
@@ -181,19 +181,17 @@ export default function Hero() {
     }, 6500)
 
     setTimeout(() => {
-      setTerminalLogs(prev => [...prev, `[REDIS] Persisting alert to PostgreSQL...`])
+      setTerminalLogs(prev => [...prev, `[REDIS] Alert received. Writing to PostgreSQL (Storage) & WebSocket (Stream) in parallel...`])
       spawnPacket('path-pub-postgres', '#FF4A4A', 1000)
+      spawnPacket('path-pub-ws', '#FF4A4A', 2000) // Longer curved bypass route
     }, 7500)
 
     setTimeout(() => {
-      setTerminalLogs(prev => [...prev,
-        `[POSTGRES] Transaction committed.`,
-        `[WEBSOCKET] Dispatching push event...`
-      ])
-      spawnPacket('path-postgres-ws', '#FF4A4A', 1000)
+      setTerminalLogs(prev => [...prev, `[POSTGRES] Event transaction committed successfully.`])
     }, 8500)
 
     setTimeout(() => {
+      setTerminalLogs(prev => [...prev, `[WEBSOCKET] Push daemon thread dispatching alert push events...`])
       spawnPacket('path-ws-dashboard', '#FF4A4A', 1500)
     }, 9500)
 
@@ -244,9 +242,9 @@ export default function Hero() {
           <div className="hero-stats">
             {[
               { num: '1400+', label: 'DSA Solved' },
-              { num: '5+',    label: 'Projects' },
+              { num: '5+', label: 'Projects' },
               { num: '1880+', label: 'LC Rating' },
-              { num: '8.65',  label: 'CGPA' },
+              { num: '8.65', label: 'CGPA' },
             ].map(({ num, label }) => (
               <div key={label} className="stat-box">
                 <span className="stat-num">{num}</span>
@@ -257,7 +255,7 @@ export default function Hero() {
 
           <div className="hero-ctas">
             <a href="#projects" className="btn-primary">▸&nbsp;VIEW PROJECTS</a>
-            <a href="#contact"  className="btn-secondary">⟶&nbsp;CONTACT ME</a>
+            <a href="#contact" className="btn-secondary">⟶&nbsp;CONTACT ME</a>
           </div>
         </div>
 
@@ -295,8 +293,8 @@ export default function Hero() {
                 <path id="path-kafka-pub" d="M 245 67.5 L 255 67.5 Q 260 67.5 260 62.5 L 265 62.5" className="sim-path" />
                 {/* Redis Pub/Sub to Postgres */}
                 <path id="path-pub-postgres" d="M 290 75 L 290 90" className="sim-path" />
-                {/* Postgres to WebSocket */}
-                <path id="path-postgres-ws" d="M 290 115 L 290 130" className="sim-path" />
+                {/* Redis Pub/Sub to WebSocket (Parallel Bypass Route) */}
+                <path id="path-pub-ws" d="M 290 75 L 255 75 Q 250 75 250 80 L 250 135 Q 250 142.5 260 142.5 L 265 142.5" className="sim-path" />
 
                 {/* WebSockets back to React UI dashboard */}
                 <path d="M 265 145 L 250 145 Q 240 145 240 165 L 240 170 L 235 170" className="sim-path" />
@@ -356,7 +354,7 @@ export default function Hero() {
                 <g className="sim-node">
                   <rect x="175" y="55" width="70" height="25" rx="2" />
                   <text x="210" y="69" className="node-lbl">KAFKA_BROKER</text>
-                  <text x="210" y="76" className="node-lbl-sub">"logs" partition</text>
+                  <text x="210" y="76" className="node-lbl-sub">"logs/alerts" partition</text>
                 </g>
 
                 {/* Component: Alert Engines Factory */}
@@ -369,7 +367,7 @@ export default function Hero() {
                 {/* PubSub: Redis Relay */}
                 <g className="sim-node">
                   <rect x="265" y="50" width="50" height="25" rx="2" />
-                  <text x="290" y="64" className="node-lbl">REDIS_PUB</text>
+                  <text x="290" y="64" className="node-lbl">REDIS_PUBSUB</text>
                   <text x="290" y="71" className="node-lbl-sub">Relay workers</text>
                 </g>
 
