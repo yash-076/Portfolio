@@ -26,7 +26,7 @@ export default function About() {
                 {'    '}<span className="str">"Full Stack Development"</span><span className="punc">,</span>{'\n'}
                 {'    '}<span className="str">"Competitive Programming"</span>{'\n'}
                 {'  '}<span className="punc">],</span>{'\n'}
-                {'  '}<span className="prop">status</span><span className="op">:</span>     <span className="kw">available_for_work</span><span className="punc">,</span>{'\n'}
+                {'  '}<span className="prop">status</span><span className="op">:</span>     <span className="kw">open_for_collaboration</span><span className="punc">,</span>{'\n'}
                 {'  '}<span className="cmt">{'// Currently @ AltissAdvance Tech'}</span>{'\n'}
                 {'}'}
                 <span className="op">;</span>
@@ -38,19 +38,15 @@ export default function About() {
           <div className="about-bio reveal">
             <h2 className="about-heading">BUILDING<br />SYSTEMS THAT<br />SCALE.</h2>
             <p>
-              I'm a <strong>Information Technology student</strong> at Harcourt Butler
-              Technical University, Kanpur — driven by a passion for engineering clean,
-              high-performance backend systems.
+              I'm an <strong>Information Technology student</strong> at Harcourt Butler Technical University, Kanpur, with a strong interest in backend engineering and building software that's reliable, scalable, and easy to maintain.
             </p>
+
             <p>
-              From real-time <strong>SOC dashboards</strong> powered by Kafka &amp; WebSockets
-              to intelligent <strong>job-matching platforms</strong>, I obsess over scalable
-              architecture, low-latency pipelines, and systems that actually hold up under load.
+              I enjoy developing systems that solve real problems from real-time security monitoring platforms using <strong>Kafka</strong> and <strong>WebSockets</strong> to backend services and APIs. I'm always looking for ways to improve performance, simplify architecture, and write clean, efficient code.
             </p>
+
             <p>
-              Outside code, I'm a dedicated <strong>competitive programmer</strong> —
-              LeetCode Knight with 1400+ problems solved and a global contest rank of
-              <strong> 1,761</strong> out of 39,000+ participants.
+              Beyond development, I actively practice <strong>competitive programming</strong>. I'm a LeetCode Knight with <strong>1400+</strong> problems solved and achieved a global contest rank of <strong>1,761</strong> out of more than <strong>39,000</strong> participants, which has strengthened my problem-solving skills and algorithmic thinking.
             </p>
 
             <div className="about-links">

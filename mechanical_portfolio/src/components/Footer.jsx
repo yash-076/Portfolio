@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="container footer-inner">
         <p className="footer-text">
           © 2026&nbsp;<span className="footer-name">YASH RASTOGI</span>
-          &nbsp;—&nbsp;B.TECH IT · HBTU · ALL RIGHTS RESERVED
+          &nbsp;-&nbsp;B.TECH IT · HBTU · ALL RIGHTS RESERVED
         </p>
         <div className="footer-links">
           <a href="https://github.com/yash-076" target="_blank" rel="noreferrer">GitHub</a>

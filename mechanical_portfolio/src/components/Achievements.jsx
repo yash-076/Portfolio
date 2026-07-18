@@ -3,20 +3,20 @@ import './Achievements.css'
 const ACHIEVEMENTS = [
   {
     icon: '★',
-    title: 'LeetCode Knight — 1880+ Rating',
+    title: 'LeetCode Knight - 1880+ Rating',
     desc: 'Solved 1400+ problems across LeetCode, Codeforces, CodeChef, and GeeksforGeeks. Consistently maintaining Knight-tier standing.',
     badge: 'COMPETITIVE',
   },
 
   {
     icon: '▲',
-    title: 'IICPC 2026 Prelims — Rank 2375',
+    title: 'IICPC 2026 Prelims - Rank 2375',
     desc: 'Secured Rank 2375 among 13,000+ participants nationwide in IICPC 2026 Prelims, placing in the top tier.',
     badge: 'ICPC',
   },
   {
     icon: '⬡',
-    title: 'Flipkart GridLock 2.0 — Round 2 Qualifier',
+    title: 'Flipkart GridLock 2.0 - Round 2 Qualifier',
     desc: 'Qualified for Round 2 out of 109K+ submissions and 10K+ teams in the Machine Learning challenge.',
     badge: 'HACKATHON',
   },
@@ -28,13 +28,13 @@ const ACHIEVEMENTS = [
   },
   {
     icon: '⬢',
-    title: 'JEE Advanced 2023 — AIR 17,423',
+    title: 'JEE Advanced 2023 - AIR 17,423',
     desc: 'Qualified one of the toughest engineering entrances globally, placing in the top tier of candidates.',
     badge: 'ACADEMICS',
   },
   {
     icon: '◇',
-    title: 'JEE Main 2023 — AIR 27,318',
+    title: 'JEE Main 2023 - AIR 27,318',
     desc: 'Secured an All India Rank of 27,318 out of 1.1+ million candidates.',
     badge: 'ACADEMICS',
   },
