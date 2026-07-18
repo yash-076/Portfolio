@@ -89,11 +89,9 @@ function useTypewriter(words) {
 
 export default function Hero() {
   const typed = useTypewriter(ROLES)
-  const [activeStep, setActiveStep] = useState(null)
   const [terminalLogs, setTerminalLogs] = useState([])
   const [clickCount, setClickCount] = useState(0)
-  const [activePackets, setActivePackets] = useState([]) // array of active packets
-  const [isSimulating, setIsSimulating] = useState(false)
+  const [activePackets, setActivePackets] = useState([]) // multiple concurrent packets
   const [dashboardStatus, setDashboardStatus] = useState('IDLE') // IDLE | OK | ALERT
   const consoleRef = useRef(null)
 
@@ -119,143 +117,110 @@ export default function Hero() {
     }, durMs)
   }
 
-  const triggerLogFlow = (agentType) => {
-    if (isSimulating) return
+  // Fires a single normal gold log ball from agentType
+  const fireNormalFlow = (agentType) => {
+    const logMsg = NORMAL_LOGS[Math.floor(Math.random() * NORMAL_LOGS.length)]
+    const agentPathKey = `path-${agentType.toLowerCase()}-gateway`
 
+    spawnPacket(agentPathKey, '#C9A84C', 1500)
+    setTerminalLogs(prev => [...prev, `[INGRESS] ${agentType}_AGENT generated raw log: "${logMsg}"`])
+
+    setTimeout(() => {
+      setTerminalLogs(prev => [...prev, `[FASTAPI] Ingest Route verified. Ingesting to Kafka queue...`])
+      spawnPacket('path-gateway-kafka', '#C9A84C', 1500)
+    }, 1500)
+
+    setTimeout(() => {
+      setTerminalLogs(prev => [...prev, `[KAFKA] Log published to topic. Rule Engine executing signatures...`])
+      spawnPacket('path-kafka-engine', '#C9A84C', 2000)
+    }, 3000)
+
+    setTimeout(() => {
+      setDashboardStatus('OK')
+      setTerminalLogs(prev => [...prev, `[ENGINE] Scan complete. Normal traffic. Event discarded.`])
+      setTimeout(() => setDashboardStatus('IDLE'), 1500)
+    }, 5000)
+  }
+
+  // Fires a single suspicious red alert ball from agentType
+  const fireThreatFlow = (agentType) => {
+    const sc = THREAT_LOGS[Math.floor(Math.random() * THREAT_LOGS.length)]
+    const agentPathKey = `path-${agentType.toLowerCase()}-gateway`
+
+    spawnPacket(agentPathKey, '#FF4A4A', 1000)
+    setTerminalLogs(prev => [...prev, `[INGRESS] 🚨 THREAT from ${agentType}_AGENT: "${sc.log}"`])
+
+    setTimeout(() => {
+      setTerminalLogs(prev => [...prev, `[FASTAPI] Malicious payload detected. Queuing to Kafka...`])
+      spawnPacket('path-gateway-kafka', '#FF4A4A', 1000)
+    }, 1000)
+
+    setTimeout(() => {
+      setTerminalLogs(prev => [...prev, `[KAFKA] Ingested. Rules Engine reading queue...`])
+      spawnPacket('path-kafka-engine', '#FF4A4A', 1500)
+    }, 2000)
+
+    setTimeout(() => {
+      setTerminalLogs(prev => [...prev,
+        `[ENGINE] Match in ${sc.engine}: ${sc.match}! [${sc.severity}]`,
+        `[ENGINE] Forwarding alert to Redis Dedup Cache...`
+      ])
+      spawnPacket('path-engine-dedupe', '#FF4A4A', 1500)
+    }, 3500)
+
+    setTimeout(() => {
+      setTerminalLogs(prev => [...prev,
+        `[REDIS] Cache miss. Unique event. Queueing to Kafka alert partition...`
+      ])
+      spawnPacket('path-dedupe-kafka', '#FF4A4A', 1500)
+    }, 5000)
+
+    setTimeout(() => {
+      setTerminalLogs(prev => [...prev, `[KAFKA] Alert broadcasted. Redis Pub/Sub reading...`])
+      spawnPacket('path-kafka-pub', '#FF4A4A', 1000)
+    }, 6500)
+
+    setTimeout(() => {
+      setTerminalLogs(prev => [...prev, `[REDIS] Persisting alert to PostgreSQL...`])
+      spawnPacket('path-pub-postgres', '#FF4A4A', 1000)
+    }, 7500)
+
+    setTimeout(() => {
+      setTerminalLogs(prev => [...prev,
+        `[POSTGRES] Transaction committed.`,
+        `[WEBSOCKET] Dispatching push event...`
+      ])
+      spawnPacket('path-postgres-ws', '#FF4A4A', 1000)
+    }, 8500)
+
+    setTimeout(() => {
+      spawnPacket('path-ws-dashboard', '#FF4A4A', 1500)
+    }, 9500)
+
+    setTimeout(() => {
+      setDashboardStatus('ALERT')
+      setTerminalLogs(prev => [...prev, `[REACT BOARD] 🛡️ 🚨 SOC ALARM: ${sc.match} INGESTED!`])
+      setTimeout(() => setDashboardStatus('IDLE'), 3000)
+    }, 11000)
+  }
+
+  const triggerLogFlow = (agentType) => {
     const nextClickCount = clickCount + 1
     setClickCount(nextClickCount)
 
-    const isThreat = nextClickCount % 3 === 0
+    // Every click fires a normal gold ball
+    fireNormalFlow(agentType)
 
-    if (isThreat) {
-      setIsSimulating(true) // Lock inputs during full threat sequence
-    }
-
-    const agentPathKey = `path-${agentType.toLowerCase()}-gateway`
-
-    if (!isThreat) {
-      // ── NORMAL LOG FLOW (Traces Agent -> Gateway -> Kafka -> Detection Engine -> Discard) ──
-      const logMsg = NORMAL_LOGS[Math.floor(Math.random() * NORMAL_LOGS.length)]
-      
-      // Step 1: Agent -> Gateway (1.5s)
-      spawnPacket(agentPathKey, '#C9A84C', 1500)
-      setActiveStep('agent')
-      setTerminalLogs(prev => [...prev, `[INGRESS] ${agentType}_AGENT generated raw log: "${logMsg}"`])
-
-      // Step 2: Gateway -> Kafka Broker (1.5s)
-      setTimeout(() => {
-        setActiveStep('gateway')
-        setTerminalLogs(prev => [...prev, `[FASTAPI] Ingest Route verified API key. Ingesting to Kafka queue...`])
-        spawnPacket('path-gateway-kafka', '#C9A84C', 1500)
-      }, 1500)
-
-      // Step 3: Kafka Broker -> Rule Engine (2.0s)
-      setTimeout(() => {
-        setActiveStep('engine')
-        setTerminalLogs(prev => [...prev, `[KAFKA] Log published to logs topic. Rule Engine consumer executing signatures...`])
-        spawnPacket('path-kafka-engine', '#C9A84C', 2000)
-      }, 3000)
-
-      // Step 4: Rule Engine -> Discarded (End of normal flow)
-      setTimeout(() => {
-        setActiveStep(null)
-        setDashboardStatus('OK')
-        setTerminalLogs(prev => [...prev, `[ENGINE] Scan complete. Normal traffic detected. Event discarded.`])
-        
-        setTimeout(() => {
-          setDashboardStatus('IDLE')
-        }, 1500)
-      }, 5000)
-
-    } else {
-      // ── THREAT LOG FLOW (Sequential segment-by-segment path tracing - Exactly 11s total) ──
-      const sc = THREAT_LOGS[Math.floor(Math.random() * THREAT_LOGS.length)]
-      
-      // Step 1: Agent -> Gateway (1.0s)
-      spawnPacket(agentPathKey, '#FF4A4A', 1000)
-      setActiveStep('agent')
-      setTerminalLogs(prev => [...prev, `[INGRESS] 🚨 MALICIOUS EVENT emitted from ${agentType}_AGENT: "${sc.log}"`])
-
-      // Step 2: Gateway -> Kafka Broker (1.0s)
-      setTimeout(() => {
-        setActiveStep('gateway')
-        setTerminalLogs(prev => [...prev, `[FASTAPI] API key verified. Malicious payload detected. Queuing raw log to Kafka...`])
-        spawnPacket('path-gateway-kafka', '#FF4A4A', 1000)
-      }, 1000)
-
-      // Step 3: Kafka Broker -> Rule Engine (1.5s)
-      setTimeout(() => {
-        setActiveStep('gateway')
-        setTerminalLogs(prev => [...prev, `[KAFKA] Ingested to Kafka buffer logs. Rules Engine reading queue...`])
-        spawnPacket('path-kafka-engine', '#FF4A4A', 1500)
-      }, 2000)
-
-      // Step 4: Rule Engine -> Redis Cache Deduplicator (1.5s)
-      setTimeout(() => {
-        setActiveStep('engine')
-        setTerminalLogs(prev => [
-          ...prev,
-          `[ENGINE] Malicious signature match in ${sc.engine}: ${sc.match}!`,
-          `[ENGINE] Forwarding generated alert to Redis Deduplication Cache...`
-        ])
-        spawnPacket('path-engine-dedupe', '#FF4A4A', 1500)
-      }, 3500)
-
-      // Step 5: Redis Cache Deduplicator -> Kafka Broker (1.5s)
-      setTimeout(() => {
-        setActiveStep('dedupe')
-        setTerminalLogs(prev => [
-          ...prev,
-          `[REDIS] Verifying alert hash... Unique event. No duplicates within 300s window.`,
-          `[REDIS] Queueing unique alert event to Kafka alert partition...`
-        ])
-        spawnPacket('path-dedupe-kafka', '#FF4A4A', 1500)
-      }, 5000)
-
-      // Step 6: Kafka Broker -> Redis Pub/Sub Relay (1.0s)
-      setTimeout(() => {
-        setActiveStep('ws')
-        setTerminalLogs(prev => [...prev, `[KAFKA] Alert queue partition broadcasted. Redis Pub/Sub consumer reading...`])
-        spawnPacket('path-kafka-pub', '#FF4A4A', 1000)
-      }, 6500)
-
-      // Step 7: Redis Pub/Sub Relay -> Postgres DB (1.0s)
-      setTimeout(() => {
-        setActiveStep('storage')
-        setTerminalLogs(prev => [...prev, `[REDIS] Alert broadcast received. Persisting event payload to PostgreSQL database...`])
-        spawnPacket('path-pub-postgres', '#FF4A4A', 1000)
-      }, 7500)
-
-      // Step 8: Postgres DB -> WebSocket Broker (1.0s)
-      setTimeout(() => {
-        setActiveStep('ws')
-        setTerminalLogs(prev => [
-          ...prev,
-          `[POSTGRES] Event transaction committed successfully.`,
-          `[WEBSOCKET] WebSocket daemon thread dispatching alert push events...`
-        ])
-        spawnPacket('path-postgres-ws', '#FF4A4A', 1000)
-      }, 8500)
-
-      // Step 9: WebSocket Broker -> React SOC UI Dashboard (1.5s)
-      setTimeout(() => {
-        spawnPacket('path-ws-dashboard', '#FF4A4A', 1500)
-      }, 9500)
-
-      // Step 10: Complete Alert Rendered on React Board
-      setTimeout(() => {
-        setActiveStep('dashboard')
-        setDashboardStatus('ALERT')
-        setTerminalLogs(prev => [...prev, `[REACT BOARD] 🛡️ 🚨 SOC CRITICAL ALARM: ${sc.match} INGESTED!`])
-        
-        setTimeout(() => {
-          setActiveStep(null)
-          setDashboardStatus('IDLE')
-          setIsSimulating(false) // Unlock simulator
-        }, 3000)
-      }, 11000)
+    // Every 3rd click ALSO fires a concurrent red suspicious ball
+    if (nextClickCount % 3 === 0) {
+      // Small random offset (200-600ms) so it feels like a separate packet
+      const offset = 200 + Math.floor(Math.random() * 400)
+      setTimeout(() => fireThreatFlow(agentType), offset)
     }
   }
+
+
+
 
   return (
     <section id="hero" className="hero">
