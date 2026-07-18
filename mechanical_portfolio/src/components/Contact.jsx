@@ -1,17 +1,45 @@
 import { useState } from 'react'
+import emailjs from '@emailjs/browser'
 import './Contact.css'
 
 export default function Contact() {
   const [status, setStatus] = useState('idle') // idle | sending | sent
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    message: ''
+  })
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setForm(prev => ({ ...prev, [name]: value }))
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     setStatus('sending')
-    setTimeout(() => {
+
+    emailjs.send(
+      'service_309jlxv',
+      'template_qt8go3n',
+      {
+        from_name: form.name,
+        to_name: 'Yash',
+        from_email: form.email,
+        to_email: 'work.yashrastogi@gmail.com',
+        message: form.message,
+      },
+      '4qTkhkSnLUzR03xWe'
+    )
+    .then(() => {
       setStatus('sent')
-      e.target.reset()
+      setForm({ name: '', email: '', message: '' })
       setTimeout(() => setStatus('idle'), 4000)
-    }, 1200)
+    }, (error) => {
+      setStatus('idle')
+      console.error(error)
+      alert('Something went wrong. Please try again later.')
+    })
   }
 
   return (
@@ -56,15 +84,39 @@ export default function Contact() {
           <form className="contact-form reveal" onSubmit={handleSubmit}>
             <div className="form-field">
               <label htmlFor="cf-name">YOUR NAME</label>
-              <input id="cf-name" type="text" placeholder="Your name" required />
+              <input
+                id="cf-name"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                type="text"
+                placeholder="Your name"
+                required
+              />
             </div>
             <div className="form-field">
               <label htmlFor="cf-email">YOUR EMAIL</label>
-              <input id="cf-email" type="email" placeholder="your@email.com" required />
+              <input
+                id="cf-email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                type="email"
+                placeholder="your@email.com"
+                required
+              />
             </div>
             <div className="form-field">
               <label htmlFor="cf-msg">MESSAGE</label>
-              <textarea id="cf-msg" rows={5} placeholder="What's on your mind..." required />
+              <textarea
+                id="cf-msg"
+                name="message"
+                value={form.message}
+                onChange={handleChange}
+                rows={5}
+                placeholder="What's on your mind..."
+                required
+              />
             </div>
 
             <button

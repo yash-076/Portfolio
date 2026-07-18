@@ -2,7 +2,7 @@ import './Education.css'
 
 const EDU = [
   {
-    degree: 'B.Tech — Information Technology',
+    degree: 'B.Tech - Information Technology',
     institution: 'Harcourt Butler Technical University, Kanpur',
     score: '8.65 CGPA',
     year: '2023 – 2027',
