@@ -235,12 +235,12 @@
   .why-popup {
     left: auto !important;
     right: 0 !important; /* Anchor to right side to grow leftwards */
-    width: 280px !important;
-    max-width: 85vw !important;
+    width: 420px !important; /* 50% increase from 280px */
+    max-width: 92vw !important;
   }
 
   .why-popup-body {
-    max-height: 220px !important; /* Slightly shorter on mobile viewports */
+    max-height: 264px !important; /* 20% increase from 220px */
   }
 }
 
