@@ -1,0 +1,121 @@
+
+
+.exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.exp-card {
+  border: 1px solid var(--border);
+  padding: 2.25rem 2.5rem;
+  position: relative;
+  transition: border-color var(--transition);
+  overflow: hidden;
+}
+
+.exp-card:hover { border-color: var(--border-hover); }
+
+.exp-card-accent {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--gold);
+}
+
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.exp-company {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.exp-subtitle {
+  color: var(--white-dim);
+  text-transform: none;
+  letter-spacing: 0.05em;
+}
+
+.exp-role {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  color: var(--white);
+  line-height: 1;
+}
+
+.exp-date {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--white-dim);
+  letter-spacing: 0.1em;
+  border: 1px solid var(--border);
+  padding: 0.3rem 0.85rem;
+  white-space: nowrap;
+  align-self: flex-start;
+}
+
+/* Tech row */
+.exp-tech {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tech-prefix {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  margin-right: 0.25rem;
+}
+
+.exp-tech-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--white-dim);
+  background: var(--surface);
+  border: 1px solid rgba(201,168,76,0.12);
+  padding: 0.2rem 0.6rem;
+}
+
+/* Bullets */
+.exp-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.exp-bullets li {
+  font-size: 0.9rem;
+  color: var(--white-dim);
+  padding: 0.6rem 0 0.6rem 1.75rem;
+  border-bottom: 1px solid rgba(201,168,76,0.06);
+  position: relative;
+  line-height: 1.7;
+}
+
+.exp-bullets li:last-child { border-bottom: none; }
+
+.exp-bullets li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-size: 0.75rem;
+  top: 0.65rem;
+}
+
+@media (max-width: 600px) {
+  .exp-card { padding: 1.5rem 1.25rem 1.5rem 1.75rem; }
+  .exp-header { flex-direction: column; gap: 0.75rem; }
+}

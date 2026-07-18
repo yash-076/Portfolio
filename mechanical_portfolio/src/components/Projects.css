@@ -1,0 +1,123 @@
+
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.project-card {
+  border: 1px solid var(--border);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--transition), transform var(--transition);
+}
+
+.project-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-5px);
+}
+
+/* Animated top gold line */
+.project-top-line {
+  position: absolute;
+  top: 0; left: 0;
+  width: 0%; height: 2px;
+  background: var(--gold);
+  transition: width 0.45s ease;
+}
+
+.project-card:hover .project-top-line { width: 100%; }
+
+/* Ghost number */
+.project-number {
+  position: absolute;
+  top: 1.25rem; right: 1.5rem;
+  font-family: var(--font-display);
+  font-size: 5rem;
+  color: rgba(240, 237, 232, 0.03);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  transition: color var(--transition);
+}
+
+.project-card:hover .project-number {
+  color: rgba(201, 168, 76, 0.06);
+}
+
+.project-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.project-title {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 0.4rem;
+}
+
+.project-date {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--white-dimmer);
+  margin-bottom: 1rem;
+}
+
+.project-desc {
+  font-size: 0.86rem;
+  color: var(--white-dim);
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.project-tech-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--white-dimmer);
+  background: var(--surface);
+  border: 1px solid rgba(201,168,76,0.1);
+  padding: 0.2rem 0.5rem;
+}
+
+.project-links {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: auto;
+}
+
+.project-link {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  transition: color var(--transition);
+}
+
+.project-link:hover { color: var(--gold-light); }
+
+@media (max-width: 900px) {
+  .projects-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 580px) {
+  .projects-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,180 @@
+/* ============================================================
+   GLOBAL DESIGN SYSTEM — Minimal Gold Mechanical Portfolio
+   Colors: #0A0A0A (Black) · #C9A84C (Gold) · #F0EDE8 (Off-White)
+============================================================ */
+
+:root {
+  --black:       #0A0A0A;
+  --surface:     #111111;
+  --surface-2:   #161616;
+  --gold:        #C9A84C;
+  --gold-dim:    #8a7035;
+  --gold-light:  #e8c96a;
+  --gold-glow:   rgba(201, 168, 76, 0.12);
+  --white:       #F0EDE8;
+  --white-dim:   #999993;
+  --white-dimmer:#4a4a46;
+  --border:      rgba(201, 168, 76, 0.18);
+  --border-hover:rgba(201, 168, 76, 0.55);
+
+  --font-display: 'Bebas Neue', cursive;
+  --font-mono:    'JetBrains Mono', monospace;
+  --font-body:    'Inter', sans-serif;
+
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+/* ── Selection ── */
+::selection { background: var(--gold); color: var(--black); }
+
+/* ── Layout helpers ── */
+.container {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section {
+  padding: 90px 0;
+  position: relative;
+  border-top: 1px solid var(--border);
+}
+
+/* Hero has no top border */
+#hero { border-top: none; }
+
+/* ── Section labels ── */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--gold);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  max-width: 60px;
+  height: 1px;
+  background: var(--gold-dim);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 3.5rem;
+  letter-spacing: 0.02em;
+}
+
+/* ── Dividers ── */
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+/* ── Reveal animations ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Background dot grid (fixed) ── */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(circle, rgba(201,168,76,0.07) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── Buttons ── */
+.btn-primary {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.9rem 2rem;
+  background: var(--gold);
+  color: var(--black);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.btn-primary:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.9rem 2rem;
+  background: transparent;
+  color: var(--white);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition), transform var(--transition);
+}
+
+.btn-secondary:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .section { padding: 80px 0; }
+  .container { padding: 0 1.25rem; }
+}
