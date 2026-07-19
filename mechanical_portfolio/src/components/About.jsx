@@ -59,6 +59,9 @@ export default function About() {
               <a href="https://leetcode.com/u/Yash955/" target="_blank" rel="noreferrer" className="about-link">
                 ↗ LeetCode
               </a>
+              <a href="https://drive.google.com/file/d/1lhOOXd6r6YnfbmeSIQ9p8SBbZRVBRIdH/view?usp=drive_link" target="_blank" rel="noreferrer" className="about-link">
+                ↗ Resume
+              </a>
               <a href="mailto:smediayash@gmail.com" className="about-link">
                 ↗ Email
               </a>
